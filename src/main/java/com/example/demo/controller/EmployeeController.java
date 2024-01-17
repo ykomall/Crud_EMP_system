@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Employee;
-import com.example.demo.serviceIMP.EmpServImp;
+import com.example.demo.service.EmpService;
+//import com.example.demo.serviceIMP.EmpServImp;
 
 
 
@@ -24,7 +25,7 @@ import com.example.demo.serviceIMP.EmpServImp;
 public class EmployeeController {
 
 	@Autowired
-		private EmpServImp esi;
+		private EmpService esi;
 		
 	@GetMapping("/home")
 	public String homePage() {
@@ -38,21 +39,21 @@ public class EmployeeController {
 		return new ResponseEntity<Employee>(e,HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping("/RemoveEmp")
+	@DeleteMapping("/RemoveEmp{id}")
 	public ResponseEntity<String> removeEmp(@PathVariable int id){
 		esi.rmvEmp(id);
 		
 		return new ResponseEntity<String>("Removed Successfully",HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("/findEmp")
+	@GetMapping("/findEmp{id}")
 	public ResponseEntity<Optional<Employee>> findEmpById(@PathVariable int id){
 		Optional<Employee> e= esi.findEmpById(id);
 		return new ResponseEntity<Optional<Employee>>(e,HttpStatus.ACCEPTED);
 		
 	}
 	
-	@GetMapping
+	@GetMapping("/all")
 	public ResponseEntity<List<Employee>> listOfEmp(){
 		List<Employee> lemp = esi.getAllEmp();
 		return new ResponseEntity<List<Employee>>(lemp,HttpStatus.ACCEPTED);

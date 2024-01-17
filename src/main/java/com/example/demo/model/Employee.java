@@ -16,6 +16,9 @@ public class Employee {
 		this.dept= dept;
 	}
 	
+	public Employee() {
+		
+	}
 	
 
 	@Id
