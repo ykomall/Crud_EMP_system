@@ -25,37 +25,37 @@ import com.example.demo.service.EmpService;
 public class EmployeeController {
 
 	@Autowired
-		private EmpService esi;
+		private EmpService eservice;
 		
 	@GetMapping("/home")
 	public String homePage() {
-		return "Welcome Employee Managemenmt";
+		return "Welcome to Employee Managemenmt";
 	}
 	
 	@PostMapping("/addEmp")
 	public ResponseEntity<Employee> addEmpl(@RequestBody Employee emp) {
 		
-		Employee e = esi.addEmp(emp);
+		Employee e = eservice.addEmp(emp);
 		return new ResponseEntity<Employee>(e,HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/RemoveEmp{id}")
 	public ResponseEntity<String> removeEmp(@PathVariable int id){
-		esi.rmvEmp(id);
+		eservice.rmvEmp(id);
 		
 		return new ResponseEntity<String>("Removed Successfully",HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping("/findEmp{id}")
 	public ResponseEntity<Optional<Employee>> findEmpById(@PathVariable int id){
-		Optional<Employee> e= esi.findEmpById(id);
+		Optional<Employee> e= eservice.findEmpById(id);
 		return new ResponseEntity<Optional<Employee>>(e,HttpStatus.ACCEPTED);
 		
 	}
 	
 	@GetMapping("/all")
 	public ResponseEntity<List<Employee>> listOfEmp(){
-		List<Employee> lemp = esi.getAllEmp();
+		List<Employee> lemp = eservice.getAllEmp();
 		return new ResponseEntity<List<Employee>>(lemp,HttpStatus.ACCEPTED);
 	}
 	
